@@ -1,0 +1,1 @@
+insert into combo (nombre,precio) values (:nombre,:precio)
