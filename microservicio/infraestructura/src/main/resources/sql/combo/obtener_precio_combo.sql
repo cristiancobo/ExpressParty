@@ -1,0 +1,1 @@
+select precio from combo where id = :id
