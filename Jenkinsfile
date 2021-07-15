@@ -1,41 +1,28 @@
 pipeline {
-  //Donde se va a ejecutar el Pipeline
+  
   agent {
-    label 'Slave_Induccion'
+    label 'Slave4_Induccion'
   }
 
-  //Opciones específicas de Pipeline dentro del Pipeline
+ 
   options {
     	buildDiscarder(logRotator(numToKeepStr: '3'))
  	disableConcurrentBuilds()
   }
-  environment {
+	environment {
         PROJECT_PATH_BACK = './microservicio/'
 	}
-
-  //Una sección que define las herramientas “preinstaladas” en Jenkins
+  
   tools {
-    jdk 'JDK11_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK11_Centos'
 	gradle 'Gradle5.0_Centos' 
   }
-/*	Versiones disponibles
-      JDK8_Mac
-      JDK6_Centos
-      JDK7_Centos
-      JDK8_Centos
-      JDK10_Centos
-      JDK11_Centos
-      JDK13_Centos
-      JDK14_Centos
-*/
 
-  //Aquí comienzan los “items” del Pipeline
   stages{
-    stage('Checkout') {
+      stage('Checkout') {
       steps{
         echo "------------>Checkout<------------"
-		checkout(
-		[
+        checkout([
             $class: 'GitSCM',
             branches: [[name: '*/main']],
             doGenerateSubmoduleConfigurations: false,
@@ -46,47 +33,64 @@ pipeline {
             credentialsId: 'GitHub_cristiancobo',
             url:'https://github.com/cristiancobo/ExpressParty'
             ]]
-        ]
-		
-		)
+        ])
+      }
+    }
+
+    stage('Clean') {
+      steps {
+		        dir("${PROJECT_PATH_BACK}")
+            {
+              sh 'gradle clean'
+            }
+
       }
     }
     
-    stage('Compile & Unit Tests') {
-      steps{
-			echo "------------>compile & Unit Tests<------------"
-			sh 'chmod +x gradlew'
-			sh './gradlew --b ./build.gradle test'
-		}
-
-
-    }
-
-    stage('Static Code Analysis') {
-      steps{
-        echo '------------>Análisis de código estático<------------'
-        withSonarQubeEnv('Sonar') {
-sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-        }
-      }
-    }
 
     stage('Build') {
       steps {
-        echo "------------>Build<------------"
+		        dir("${PROJECT_PATH_BACK}")
+            {
+              sh 'gradle build -x test'
+            }
+
       }
     }  
-  }
 
+
+	stage('Tests'){
+		parallel {
+			stage(''){
+				steps {
+						dir("${PROJECT_PATH_BACK}"){
+						sh 'gradle --stacktrace test'
+					}
+				}
+			}
+		}
+	}
+
+  stage('Static Code Analysis'){
+		steps{
+			echo '------------>Analisis de código estático<------------'
+			withSonarQubeEnv('Sonar') {
+                     sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=./microservicio/sonar-project.properties"
+            }
+		}
+	}
+  }
   post {
     always {
       echo 'This will always run'
     }
     success {
       echo 'This will run only if successful'
+	    mail (to: 'cristian.cobo@ceiba.com.co',subject: "Success Pipeline:${currentBuild.fullDisplayName}",body: "Success build ${env.BUILD_URL}")
     }
     failure {
       echo 'This will run only if failed'
+		  mail (to: 'cristian.cobo@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
     }
     unstable {
       echo 'This will run only if the run was marked as unstable'
@@ -97,4 +101,4 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     }
   }
 }
-
+       
