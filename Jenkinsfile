@@ -15,7 +15,7 @@ pipeline {
   
   tools {
     jdk 'JDK11_Centos'
-	gradle 'Gradle5.0_Centos' 
+	gradle 'Gradle7.1.1_Centos' 
   }
 
   stages{
