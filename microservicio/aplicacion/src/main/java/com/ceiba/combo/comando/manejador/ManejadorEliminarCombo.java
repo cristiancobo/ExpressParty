@@ -1,4 +1,4 @@
-package com.ceiba.combo.manejador;
+package com.ceiba.combo.comando.manejador;
 
 import com.ceiba.combo.servicio.ServicioEliminarCombo;
 import com.ceiba.manejador.ManejadorComando;

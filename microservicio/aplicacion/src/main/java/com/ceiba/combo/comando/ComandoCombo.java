@@ -1,4 +1,4 @@
-package com.ceiba.combo;
+package com.ceiba.combo.comando;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

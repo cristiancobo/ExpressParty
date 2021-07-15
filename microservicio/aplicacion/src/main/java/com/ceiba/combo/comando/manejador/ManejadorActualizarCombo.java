@@ -1,7 +1,7 @@
-package com.ceiba.combo.manejador;
+package com.ceiba.combo.comando.manejador;
 
-import com.ceiba.combo.ComandoCombo;
-import com.ceiba.combo.fabrica.FabricaCombo;
+import com.ceiba.combo.comando.ComandoCombo;
+import com.ceiba.combo.comando.fabrica.FabricaCombo;
 import com.ceiba.combo.modelo.entidad.Combo;
 import com.ceiba.combo.servicio.ServicioActualizarCombo;
 import com.ceiba.manejador.ManejadorComando;

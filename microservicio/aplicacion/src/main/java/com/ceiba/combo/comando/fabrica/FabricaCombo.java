@@ -1,6 +1,6 @@
-package com.ceiba.combo.fabrica;
+package com.ceiba.combo.comando.fabrica;
 
-import com.ceiba.combo.ComandoCombo;
+import com.ceiba.combo.comando.ComandoCombo;
 import com.ceiba.combo.modelo.entidad.Combo;
 import org.springframework.stereotype.Component;
 
