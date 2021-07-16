@@ -1,6 +1,8 @@
 package com.ceiba.reserva.servicio;
 
 import com.ceiba.combo.puerto.repositorio.RepositorioCombo;
+import com.ceiba.dominio.excepcion.ExcepcionComboNoExiste;
+import com.ceiba.dominio.excepcion.ExcepcionTopeNumeroReservasFecha;
 import com.ceiba.dominio.util.horarios.GestionHorarios;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
@@ -17,6 +19,7 @@ public class ServicioCrearReserva {
     private final RepositorioReserva repositorioReserva;
     private final RepositorioCombo repositorioCombo;
     private static final String TOPE_NUMERO_RESERVAS = "No es posible realizar una reserva para esta fecha. Elige una nueva";
+    private static final String COMBO_NO_EXISTE = "El combo seleccionado no existe";
     private static final int NUMERO_MAXIMO_DIAS_RESERVACION = 2;
     private static final double SOBRE_COSTO_FIN_SEMANA = 0.07;
     private static final double SOBRE_COSTO_FESTIVO = 0.07;
@@ -44,15 +47,19 @@ public class ServicioCrearReserva {
         validarDiaHabil(reserva);
         verficarDescuentoPorVariasReservas(reserva);
         if(verificarCantidadReservasParaFecha(reserva) >= 4){
-          //TODO:  throw  new ExceptionNumeroReservaFecha(TOPE_NUMERO_RESERVAS);
+         throw  new ExcepcionTopeNumeroReservasFecha(TOPE_NUMERO_RESERVAS);
         }
         return this.repositorioReserva.crear(reserva);
     }
 
     public void generarPrecioBaseReservaCombo(Reserva reserva){
-        //TODO: Validacion existencia reserva
-        double precioBase = this.repositorioCombo.obtenerPrecioCombo(reserva.getIdCombo());
-        reserva.establecerPrecioBaseComboReserva(precioBase);
+         if(this.repositorioCombo.existe(reserva.getIdCombo())){
+             double precioBase = this.repositorioCombo.obtenerPrecioCombo(reserva.getIdCombo());
+             reserva.establecerPrecioBaseComboReserva(precioBase);
+         }else{
+            throw new ExcepcionComboNoExiste(COMBO_NO_EXISTE);
+         }
+
     }
 
     public boolean validarDiaFestivoParaSobreCosto(Reserva reserva){

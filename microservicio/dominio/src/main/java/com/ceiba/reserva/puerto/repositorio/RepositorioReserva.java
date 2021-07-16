@@ -56,5 +56,12 @@ public interface RepositorioReserva {
      */
     public LocalDateTime encontrarFechaCreacionReserva(Long id);
 
+    /**
+     * Método para verificar si existe una reserva o no por su id
+     * @param id
+     * @return
+     */
+    public boolean existe(Long id);
+
 
 }
