@@ -49,5 +49,12 @@ public interface RepositorioReserva {
      */
     public boolean existeReservaConIdPersona(String idPersonaReserva);
 
+    /**
+     * Método para encontrar la fecha de creación de una reserva
+     * @param id
+     * @return
+     */
+    public LocalDateTime encontrarFechaCreacionReserva(Long id);
+
 
 }
