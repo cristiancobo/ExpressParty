@@ -1,6 +1,6 @@
 update reserva
-set combo_id = :comboId,
-	precio = :precioCombo,
+set combo_id = :idCombo,
+	precio = :precioFinalReserva,
 	fecha_creacion = :fechaCreacionReserva,
 	fecha_reserva = :fechaReservacion,
 	fecha_expiracion = :fechaExpiracion,

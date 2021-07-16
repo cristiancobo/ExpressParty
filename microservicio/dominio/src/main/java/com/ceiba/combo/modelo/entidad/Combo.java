@@ -2,6 +2,7 @@ package com.ceiba.combo.modelo.entidad;
 
 import lombok.Getter;
 import lombok.Setter;
+import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 
 @Getter
 @Setter
@@ -17,8 +18,13 @@ public class Combo {
     private double precio;
 
     public Combo(Long id, String nombre, double precio) {
+        validarObligatorio(nombre,NOMBRE_COMBO_OBLIGATORIO);
+        validarObligatorio(precio,PRECIO_COMBO_OBLIGATORIO);
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
     }
+
+
+
 }

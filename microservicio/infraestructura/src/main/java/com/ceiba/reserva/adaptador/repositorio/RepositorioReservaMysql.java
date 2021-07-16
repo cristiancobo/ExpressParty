@@ -33,6 +33,12 @@ public class RepositorioReservaMysql implements RepositorioReserva {
     @SqlStatement(namespace="reserva", value="existe_reserva_por_id_persona")
     private static String sqlExisteReservaIdPersona;
 
+    @SqlStatement(namespace="reserva", value="encontrar_fecha_creacion_reserva")
+    private static String sqlEncontrarFechaCreacionReserva;
+
+    @SqlStatement(namespace="reserva", value="existe")
+    private static String sqlExiste;
+
     public RepositorioReservaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -76,6 +82,20 @@ public class RepositorioReservaMysql implements RepositorioReserva {
         paramSource.addValue("idPersonaReserva",idPersonaReserva);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteReservaIdPersona,paramSource, Boolean.class);
 
+    }
+
+    @Override
+    public LocalDateTime encontrarFechaCreacionReserva(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id",id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlEncontrarFechaCreacionReserva,paramSource, LocalDateTime.class);
+    }
+
+    @Override
+    public boolean existe(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id",id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
     }
 
 }

@@ -2,6 +2,7 @@ package com.ceiba.reserva.modelo.entidad;
 
 import lombok.Getter;
 import lombok.Setter;
+import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 
 import java.time.LocalDateTime;
 
@@ -29,6 +30,12 @@ public class Reserva {
     private String direccionPersonaReserva;
 
     public Reserva(Long id, Long idCombo, double precioFinalReserva, LocalDateTime fechaCreacionReserva, LocalDateTime fechaReservacion, LocalDateTime fechaExpiracion, String nombrePersonaReserva, String idPersonaReserva, String telefonoPersonReserva, String direccionPersonaReserva) {
+        validarObligatorio(idCombo, ID_COMBO_OBLIGATORIO);
+        validarObligatorio(nombrePersonaReserva,NOMBRE_PERSONA_RESERVA_OBLIGATORIO);
+        validarObligatorio(idPersonaReserva, ID_PERSONA_RESERVA_OBLIGATORIO);
+        validarObligatorio(telefonoPersonReserva,TELEFONO_PERSONA_OBLIGATORIO);
+        validarObligatorio(direccionPersonaReserva,DIRECCION_PERSONA_OBLIGATORIO);
+
         this.id = id;
         this.idCombo = idCombo;
         this.precioFinalReserva = precioFinalReserva;
