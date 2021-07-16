@@ -1,0 +1,1 @@
+select count(1) from reserva where id_persona = :idPersonaReserva
