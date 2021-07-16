@@ -1,5 +1,6 @@
 package com.ceiba.reserva.servicio;
 
+import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 
 public class ServicioEliminarReserva {
@@ -12,6 +13,12 @@ public class ServicioEliminarReserva {
     }
 
     public void ejecutar(Long id) {
+
         this.repositorioReserva.eliminar(id);
     }
+
+    public boolean verficarCumplimiento30minutosParaEliminarReserva(Reserva reserva){
+        return false;
+    }
+
 }

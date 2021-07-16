@@ -1,0 +1,1 @@
+select fecha_creacion from reserva where id = :id
