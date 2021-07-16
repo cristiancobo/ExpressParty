@@ -1,0 +1,1 @@
+SELECT count(*) FROM reserva WHERE CAST(fecha_reserva AS DATE) = :fecha
