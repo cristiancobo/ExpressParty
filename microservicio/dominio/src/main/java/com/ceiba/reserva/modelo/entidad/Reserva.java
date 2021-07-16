@@ -34,6 +34,7 @@ public class Reserva {
         validarObligatorio(nombrePersonaReserva,NOMBRE_PERSONA_RESERVA_OBLIGATORIO);
         validarObligatorio(idPersonaReserva, ID_PERSONA_RESERVA_OBLIGATORIO);
         validarObligatorio(telefonoPersonReserva,TELEFONO_PERSONA_OBLIGATORIO);
+        validarObligatorio(fechaReservacion,FECHA_RESERVA);
         validarObligatorio(direccionPersonaReserva,DIRECCION_PERSONA_OBLIGATORIO);
 
         this.id = id;
