@@ -44,7 +44,7 @@ public class ServicioCrearReserva {
         validarDiaFinSemanaParaSobreCosto(reserva);
         establecerFechaDeCreacionReserva(reserva);
         establecerFechaDeExpiracionReserva(reserva);
-        validarDiaHabil(reserva);
+        validarDiaHabilParaDescuento(reserva);
         verficarDescuentoPorVariasReservas(reserva);
         if(verificarCantidadReservasParaFecha(reserva) >= 4){
          throw  new ExcepcionTopeNumeroReservasFecha(TOPE_NUMERO_RESERVAS);
@@ -73,11 +73,13 @@ public class ServicioCrearReserva {
         }
         return false;
     }
-    public void validarDiaHabil(Reserva reserva){
+    public boolean validarDiaHabilParaDescuento(Reserva reserva){
         boolean esDiaHabil = !validarDiaFestivoParaSobreCosto(reserva)  && !validarDiaFinSemanaParaSobreCosto(reserva);
         if (esDiaHabil){
             reserva.setPrecioFinalReserva(reserva.getPrecioFinalReserva()-(reserva.getPrecioFinalReserva()*DESCUENTO_POR_DIA_HABIL));
+            return true;
         }
+        return false;
     }
 
     public boolean validarDiaFinSemanaParaSobreCosto(Reserva reserva){
@@ -90,33 +92,36 @@ public class ServicioCrearReserva {
         return false;
     }
 
-    public void establecerFechaDeCreacionReserva(Reserva reserva){
+    public LocalDateTime establecerFechaDeCreacionReserva(Reserva reserva){
         reserva.setFechaCreacionReserva(LocalDateTime.now());
+        return reserva.getFechaCreacionReserva();
     }
-    public void establecerFechaDeExpiracionReserva(Reserva reserva){
+    public LocalDateTime establecerFechaDeExpiracionReserva(Reserva reserva){
         GestionHorarios gestionHorarios = new GestionHorarios();
         Date fechaReservacionConvertida = java.util.Date
                 .from(reserva.getFechaReservacion().atZone(ZoneId.systemDefault())
                         .toInstant());
         reserva.setFechaExpiracion(gestionHorarios.calcularSiguienteDiaHabil(fechaReservacionConvertida,NUMERO_MAXIMO_DIAS_RESERVACION));
+        return reserva.getFechaExpiracion();
     }
 
     public int verificarCantidadReservasParaFecha(Reserva reserva){
         return this.repositorioReserva.numeroReservasParaUnaFecha(reserva.getFechaReservacion().toLocalDate());
     }
 
-    public void verficarDescuentoPorVariasReservas(Reserva reserva){
+    public double verficarDescuentoPorVariasReservas(Reserva reserva){
         if(this.repositorioReserva.existeReservaConIdPersona(reserva.getIdPersonaReserva()))
         {
-
             LocalDateTime ultimaFechaReservacion = this.repositorioReserva.encontrarUltimaFechaReservaPorIdPersona(reserva.getIdPersonaReserva());
             LocalDateTime fechaActual = LocalDateTime.now();
             if(fechaActual.isBefore(ultimaFechaReservacion)){
                 reserva.setPrecioFinalReserva(reserva.getPrecioFinalReserva()-(reserva.getPrecioFinalReserva()*DESCUENTO_POR_VARIAS_RESERVAS));
+                return reserva.getPrecioFinalReserva();
             }
 
 
         }
+        return 0;
     }
 
 
