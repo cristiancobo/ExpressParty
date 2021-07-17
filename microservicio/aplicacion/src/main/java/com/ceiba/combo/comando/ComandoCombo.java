@@ -13,5 +13,5 @@ public class ComandoCombo {
 
     private Long id;
     private String nombre;
-    private double precio;
+    private Double precio;
 }

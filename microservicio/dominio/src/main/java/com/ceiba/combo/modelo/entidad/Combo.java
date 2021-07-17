@@ -15,9 +15,9 @@ public class Combo {
 
     private Long id;
     private String nombre;
-    private double precio;
+    private Double precio;
 
-    public Combo(Long id, String nombre, double precio) {
+    public Combo(Long id, String nombre, Double precio) {
         validarObligatorio(nombre,NOMBRE_COMBO_OBLIGATORIO);
         validarObligatorio(precio,PRECIO_COMBO_OBLIGATORIO);
         this.id = id;
