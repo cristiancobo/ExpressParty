@@ -26,12 +26,6 @@ public class ServicioCrearReserva {
     private static final double DESCUENTO_POR_VARIAS_RESERVAS = 0.15;
     private static final double DESCUENTO_POR_DIA_HABIL = 0.05;
 
-
-
-
-
-
-
     public ServicioCrearReserva(RepositorioReserva repositorioReserva, RepositorioCombo repositorioCombo) {
         this.repositorioReserva = repositorioReserva;
         this.repositorioCombo = repositorioCombo;
