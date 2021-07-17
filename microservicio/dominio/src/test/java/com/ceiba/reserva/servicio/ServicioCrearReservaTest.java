@@ -3,6 +3,7 @@ package com.ceiba.reserva.servicio;
 import com.ceiba.BasePrueba;
 import com.ceiba.combo.puerto.repositorio.RepositorioCombo;
 import com.ceiba.dominio.excepcion.ExcepcionComboNoExiste;
+import com.ceiba.dominio.excepcion.ExcepcionTopeNumeroReservasFecha;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
@@ -81,15 +82,16 @@ public class ServicioCrearReservaTest {
         Assert.assertEquals(0, precioFinalReserva, 0);
     }
     @Test
-    public void validarTopeDeReservasParaUnMismoDiaReservasNoDisponibles(){
+    public void validarTopeDeReservasParaUnMismoDiaReservasNoDisponiblesMayorIgual4(){
         Reserva reserva = new ReservaTestDataBuilder().build();
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(true);
-        Mockito.when(repositorioReserva.numeroReservasParaUnaFecha(Mockito.any())).thenReturn(4);
-        int numeroReservas = new ServicioCrearReserva(repositorioReserva,repositorioCombo).verificarCantidadReservasParaFecha(reserva);
-        Assert.assertEquals(4,numeroReservas);
+        Mockito.when(repositorioReserva.numeroReservasParaUnaFecha(Mockito.any())).thenReturn(5);
+        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo);
+        BasePrueba.assertThrows(()-> servicioCrearReserva.verificarCantidadReservasParaFecha(reserva), ExcepcionTopeNumeroReservasFecha.class, "No es posible realizar una reserva para esta fecha. Elige una nueva");
     }
+
 
     @Test
     public void validarTopeDeReservasParaUnMismoDiaReservasSiDisponibles(){
@@ -117,6 +119,7 @@ public class ServicioCrearReservaTest {
         reserva.setFechaExpiracion(LocalDateTime.of(2021,04,03,06,45,12));
         Assert.assertFalse(reserva.getFechaExpiracion().equals(fechaExpiracion));
     }
+    //TODO: Realizar prueba
     @Test
     public void validarFechaCreacionReservaCorrecta(){
 

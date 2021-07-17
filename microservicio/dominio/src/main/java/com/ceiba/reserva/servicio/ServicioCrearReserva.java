@@ -25,6 +25,7 @@ public class ServicioCrearReserva {
     private static final double SOBRE_COSTO_FESTIVO = 0.07;
     private static final double DESCUENTO_POR_VARIAS_RESERVAS = 0.15;
     private static final double DESCUENTO_POR_DIA_HABIL = 0.05;
+    private static final int NUMERO_MAXIMO_RESERVAS_PARA_UNA_FECHA = 4;
 
     public ServicioCrearReserva(RepositorioReserva repositorioReserva, RepositorioCombo repositorioCombo) {
         this.repositorioReserva = repositorioReserva;
@@ -40,9 +41,7 @@ public class ServicioCrearReserva {
         establecerFechaDeExpiracionReserva(reserva);
         validarDiaHabilParaDescuento(reserva);
         verficarDescuentoPorVariasReservas(reserva);
-        if(verificarCantidadReservasParaFecha(reserva) >= 4){
-         throw  new ExcepcionTopeNumeroReservasFecha(TOPE_NUMERO_RESERVAS);
-        }
+        verificarCantidadReservasParaFecha(reserva);
         return this.repositorioReserva.crear(reserva);
     }
 
@@ -100,6 +99,10 @@ public class ServicioCrearReserva {
     }
 
     public int verificarCantidadReservasParaFecha(Reserva reserva){
+
+        if( this.repositorioReserva.numeroReservasParaUnaFecha(reserva.getFechaReservacion().toLocalDate()) > NUMERO_MAXIMO_RESERVAS_PARA_UNA_FECHA){
+           throw  new ExcepcionTopeNumeroReservasFecha(TOPE_NUMERO_RESERVAS);
+        }
         return this.repositorioReserva.numeroReservasParaUnaFecha(reserva.getFechaReservacion().toLocalDate());
     }
 
