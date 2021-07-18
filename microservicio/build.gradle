@@ -73,6 +73,7 @@ repositories {
 
 dependencies {
 
+	implementation 'junit:junit:4.13.1'
 	configurations {
     	runtime.exclude module: 'spring-boot-starter-tomcat'
     	compile.exclude module: 'spring-boot-starter-tomcat'
