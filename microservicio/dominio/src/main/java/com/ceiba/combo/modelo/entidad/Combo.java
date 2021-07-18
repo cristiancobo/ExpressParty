@@ -5,7 +5,6 @@ import lombok.Setter;
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 
 @Getter
-@Setter
 /**
  * Clase que representa un combo de la entidad combo
  */
