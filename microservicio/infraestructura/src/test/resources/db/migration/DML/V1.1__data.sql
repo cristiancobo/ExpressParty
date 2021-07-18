@@ -1,1 +1,1 @@
-insert into usuario(nombre,clave,fecha_creacion) values('test','1234',now())
+insert into combo(id,nombre,precio) values(1,'combo 1',100000.0)
