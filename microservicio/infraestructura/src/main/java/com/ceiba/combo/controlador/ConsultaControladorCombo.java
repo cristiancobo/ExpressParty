@@ -22,7 +22,7 @@ public class ConsultaControladorCombo {
     }
 
     @GetMapping
-    @ApiOperation("Listar reservas")
+    @ApiOperation("Listar combos")
     public List<DtoCombo> listar(){
         return this.manejadorListarCombos.ejecutar();
     }
