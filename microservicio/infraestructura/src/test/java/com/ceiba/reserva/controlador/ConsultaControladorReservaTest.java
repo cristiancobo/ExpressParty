@@ -24,18 +24,9 @@ public class ConsultaControladorReservaTest {
 
     @Autowired
     private MockMvc mocMvc;
+    //TODO: Realizar prueba
     @Test
     public void listar() throws Exception {
-        // arrange
 
-        // act - assert
-        mocMvc.perform(get("/reservas")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].idCombo",is(1)))
-
-        ;
     }
 }
