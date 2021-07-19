@@ -28,8 +28,8 @@ public class ServicioEliminarReservaTest {
     public void verificarExistenciaReserva(){
 
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
-        ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
+        ServicioEliminarReserva servicioEliminarReserva = new ServicioEliminarReserva(repositorioReserva);
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
-        BasePrueba.assertThrows(()-> servicioActualizarReserva.verficiarExistenciaReserva(1L), ExcepcionNoExisteReserva.class, "La reserva que intenta eliminar no existe");
+        BasePrueba.assertThrows(()-> servicioEliminarReserva.verficiarExistenciaReserva(1L), ExcepcionNoExisteReserva.class, "La reserva que intenta eliminar no existe");
     }
 }
