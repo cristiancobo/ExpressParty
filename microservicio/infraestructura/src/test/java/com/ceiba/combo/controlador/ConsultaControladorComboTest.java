@@ -25,7 +25,6 @@ public class ConsultaControladorComboTest {
     @Autowired
     private MockMvc mocMvc;
 
-    //TODO: Realizar prueba
     @Test
     public void listar()  throws Exception{
         // arrange

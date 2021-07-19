@@ -24,9 +24,14 @@ public class ConsultaControladorReservaTest {
 
     @Autowired
     private MockMvc mocMvc;
-    //TODO: Realizar prueba
+
     @Test
     public void listar() throws Exception {
+        // arrange
 
+        // act - assert
+        mocMvc.perform(get("/reservas")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
