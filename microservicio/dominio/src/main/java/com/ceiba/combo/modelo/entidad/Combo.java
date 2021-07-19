@@ -9,8 +9,8 @@ import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
  * Clase que representa un combo de la entidad combo
  */
 public class Combo {
-    private final String NOMBRE_COMBO_OBLIGATORIO = "El nombre del combo es obligatorio";
-    private final String PRECIO_COMBO_OBLIGATORIO = "El precio del combo es obligatorio";
+    private static final String NOMBRE_COMBO_OBLIGATORIO = "El nombre del combo es obligatorio";
+    private static final String PRECIO_COMBO_OBLIGATORIO = "El precio del combo es obligatorio";
 
     private Long id;
     private String nombre;
