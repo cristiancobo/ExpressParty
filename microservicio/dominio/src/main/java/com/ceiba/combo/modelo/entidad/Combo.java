@@ -1,7 +1,6 @@
 package com.ceiba.combo.modelo.entidad;
 
 import lombok.Getter;
-import lombok.Setter;
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 
 @Getter
