@@ -7,7 +7,6 @@ import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 public class Reserva {
 
     private static final String NOMBRE_PERSONA_RESERVA_OBLIGATORIO = "El nombre de la persona quien reserva es obligatorio";
@@ -49,7 +48,13 @@ public class Reserva {
         this.direccionPersonaReserva = direccionPersonaReserva;
     }
 
-    public void establecerPrecioBaseComboReserva(double precioBase){
-        setPrecioFinalReserva(precioBase);
+    public void establecerPrecioComboReserva(double precioBase){
+        this.precioFinalReserva = precioBase;
+    }
+    public void establecerFechaCreacionReserva(LocalDateTime fechaCreacionReserva){
+        this.fechaCreacionReserva = fechaCreacionReserva;
+    }
+    public void establecerFechaExpiracionReserva(LocalDateTime fechaExpiracion){
+        this.fechaExpiracion = fechaExpiracion;
     }
 }

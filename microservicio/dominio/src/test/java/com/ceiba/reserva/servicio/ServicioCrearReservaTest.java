@@ -116,7 +116,7 @@ public class ServicioCrearReservaTest {
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         LocalDateTime fechaExpiracion = new ServicioCrearReserva(repositorioReserva,repositorioCombo).establecerFechaDeExpiracionReserva(reserva);
-        reserva.setFechaExpiracion(LocalDateTime.of(2021,04,03,06,45,12));
+        reserva.establecerFechaExpiracionReserva(LocalDateTime.of(2021,04,03,06,45,12));
         Assert.assertFalse(reserva.getFechaExpiracion().equals(fechaExpiracion));
     }
     //TODO: Realizar prueba
@@ -131,24 +131,16 @@ public class ServicioCrearReservaTest {
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         LocalDateTime fechaCreacion = new ServicioCrearReserva(repositorioReserva,repositorioCombo).establecerFechaDeCreacionReserva(reserva);
-        reserva.setFechaCreacionReserva(LocalDateTime.of(2021,04,2,12,45,02));
+        reserva.establecerFechaCreacionReserva(LocalDateTime.of(2021,04,2,12,45,02));
         Assert.assertFalse(fechaCreacion.equals(reserva.getFechaCreacionReserva()));
     }
-    //TODO Realizar prueba
-    @Test
-    public void validarSobreCostoDiaFinSemana(){
 
-    }
     //TODO Realizar prueba
     @Test
     public void validarDescuentoPorDiaHabil(){
 
     }
-    //TODO Realizar prueba
-    @Test
-    public void  validarDescuentoPorDiaFestivo(){
 
-    }
 
     @Test
     public void  validarPrecioBaseComboExistenteParaReserva(){
