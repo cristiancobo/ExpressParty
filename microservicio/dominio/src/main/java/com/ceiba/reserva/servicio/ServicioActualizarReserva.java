@@ -11,9 +11,9 @@ import java.time.temporal.ChronoUnit;
 public class ServicioActualizarReserva {
 
     private final RepositorioReserva repositorioReserva;
-    private final String RESERVA_NO_EXISTE = "La reserva que intenta eliminar no existe";
-    private final String TIEMPO_EXCEDIDO = "El tiempo para realizar la cancelación excedió";
-    private final int TIEMPO_MINUTOS_MAXIMO_CANCELACION_RESERVA = 30;
+    private  static final String RESERVA_NO_EXISTE = "La reserva que intenta eliminar no existe";
+    private static final String TIEMPO_EXCEDIDO = "El tiempo para realizar la cancelación excedió";
+    private static final int TIEMPO_MINUTOS_MAXIMO_CANCELACION_RESERVA = 30;
 
 
     public ServicioActualizarReserva(RepositorioReserva repositorioReserva) {
@@ -39,7 +39,7 @@ public class ServicioActualizarReserva {
         LocalDateTime fechaReservacion = this.repositorioReserva.encontrarFechaCreacionReserva(id);
         LocalDateTime tiempo = LocalDateTime.from( fechaReservacion );
         long minutosTranscurridos = tiempo.until( fechaActual, ChronoUnit.MINUTES );
-        if(!(minutosTranscurridos < TIEMPO_MINUTOS_MAXIMO_CANCELACION_RESERVA) ){
+        if(minutosTranscurridos >= TIEMPO_MINUTOS_MAXIMO_CANCELACION_RESERVA){
             throw new ExcepcionTiempoExcedido(TIEMPO_EXCEDIDO);
         }
 
