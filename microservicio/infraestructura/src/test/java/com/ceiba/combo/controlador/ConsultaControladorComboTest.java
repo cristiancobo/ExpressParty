@@ -32,7 +32,9 @@ public class ConsultaControladorComboTest {
         // act - assert
         mocMvc.perform(get("/combos")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].nombre", is("combo 1")));
 
     }
 }
