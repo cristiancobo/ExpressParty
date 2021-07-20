@@ -15,6 +15,10 @@ dependencies {
 	testImplementation project.ext.mockito
 	testImplementation project(':comun:comun-test')
 	implementation project(':comun:comun-dominio')
+	// https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4
+	testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.7'
+
+	testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.7'
 
 	compileOnly project.ext.lombok
 	annotationProcessor project.ext.lombok

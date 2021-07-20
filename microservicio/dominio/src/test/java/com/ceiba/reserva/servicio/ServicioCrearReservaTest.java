@@ -9,13 +9,26 @@ import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.testdatabuilder.ReservaTestDataBuilder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.junit.Assert;
-
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.api.mockito.PowerMockito;
 import java.time.LocalDateTime;
 
-
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(ServicioCrearReserva.class)
+@PowerMockIgnore("jdk.internal.reflect.*")
 public class ServicioCrearReservaTest {
+
+    //TODO: Mover pruebas a su respectivo paquete
+
+    @Mock
+    LocalDateTime localDateTime;
 
     @Test
     public void validarPropiedadIdComboObligatorioSinValor(){
@@ -141,16 +154,17 @@ public class ServicioCrearReservaTest {
 
     }
 
-
     @Test
     public void  validarPrecioBaseComboExistenteParaReserva(){
         Reserva reserva = new ReservaTestDataBuilder().build();
+        PowerMockito.spy(LocalDateTime.class);
+        PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,18,12,21,12));
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(true);
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo);
-        servicioCrearReserva.generarPrecioBaseReservaCombo(reserva);
+        servicioCrearReserva.ejecutar(reserva);
         Assert.assertEquals(100000.0,reserva.getPrecioFinalReserva(),0);
     }
     @Test
@@ -160,7 +174,7 @@ public class ServicioCrearReservaTest {
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(false);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo);
-        BasePrueba.assertThrows(() -> servicioCrearReserva.generarPrecioBaseReservaCombo(reserva), ExcepcionComboNoExiste.class,"El combo seleccionado no existe");
+        BasePrueba.assertThrows(() -> servicioCrearReserva.ejecutar(reserva), ExcepcionComboNoExiste.class,"El combo seleccionado no existe");
 
     }
 

@@ -33,14 +33,15 @@ public class ComandoControladorCombo {
     @DeleteMapping(value="/{id}")
     @ApiOperation("Eliminar combo")
     public void eliminar(@PathVariable Long id) {
-        manejadorEliminarCombo.ejecutar(id);
+
+     //   manejadorEliminarCombo.ejecutar(id);
     }
 
     @PutMapping(value="/{id}")
     @ApiOperation("Actualizar combo")
     public void actualizar(@RequestBody ComandoCombo comandoCombo, @PathVariable Long id) {
         comandoCombo.setId(id);
-        manejadorActualizarCombo.ejecutar(comandoCombo);
+     //   manejadorActualizarCombo.ejecutar(comandoCombo);
     }
 }
 

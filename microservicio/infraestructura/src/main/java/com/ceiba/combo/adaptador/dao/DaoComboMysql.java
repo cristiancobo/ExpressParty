@@ -20,6 +20,7 @@ public class DaoComboMysql implements DaoCombo {
     private static String sqlListar;
 
 
+
     public DaoComboMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -28,4 +29,5 @@ public class DaoComboMysql implements DaoCombo {
     public List<DtoCombo> listar() {
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoCombo());
     }
+
 }

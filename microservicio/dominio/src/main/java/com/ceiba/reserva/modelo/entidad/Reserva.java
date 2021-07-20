@@ -57,4 +57,6 @@ public class Reserva {
     public void establecerFechaExpiracionReserva(LocalDateTime fechaExpiracion){
         this.fechaExpiracion = fechaExpiracion;
     }
+
+    //TODO: Validaciones que me ayuden a limitar.
 }

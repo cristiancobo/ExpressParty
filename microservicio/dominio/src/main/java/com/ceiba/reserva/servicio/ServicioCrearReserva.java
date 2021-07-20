@@ -42,7 +42,7 @@ public class ServicioCrearReserva {
         return this.repositorioReserva.crear(reserva);
     }
 
-    public void generarPrecioBaseReservaCombo(Reserva reserva){
+    private void generarPrecioBaseReservaCombo(Reserva reserva){
          if(this.repositorioCombo.existe(reserva.getIdCombo())){
              double precioBase = this.repositorioCombo.obtenerPrecioCombo(reserva.getIdCombo());
              reserva.establecerPrecioComboReserva(precioBase);
