@@ -24,7 +24,7 @@ import java.util.Calendar;
 public class ServicioEliminarReservaTest {
 
     @Test
-    public void validarEliminarReservaCuandoExiste(){
+    public void validarEliminarReservaCuandoExistePeroExcedeTiempo(){
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
         LocalDateTime fecha = LocalDateTime.of(2021,07,21,12,10,12);
         PowerMockito.when(daoReserva.encontrarFechaCreacionReserva(Mockito.anyLong())).thenReturn(fecha);
@@ -45,4 +45,16 @@ public class ServicioEliminarReservaTest {
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
         BasePrueba.assertThrows(()-> servicioEliminarReserva.ejecutar(1L), ExcepcionNoExisteReserva.class, "La reserva que intenta eliminar no existe");
     }
+    @Test
+    public void validarEliminarReservaCuandoExisteCorrectamente(){
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
+        Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(daoReserva.encontrarFechaCreacionReserva(Mockito.anyLong())).thenReturn(LocalDateTime.now());
+        Mockito.doNothing().when(repositorioReserva).eliminar(Mockito.anyLong());
+        ServicioEliminarReserva servicioEliminarReserva = new ServicioEliminarReserva(repositorioReserva, daoReserva);
+        servicioEliminarReserva.ejecutar(1L);
+        Mockito.verify(repositorioReserva,Mockito.times(1)).eliminar(Mockito.anyLong());
+    }
+
 }

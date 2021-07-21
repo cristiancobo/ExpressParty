@@ -36,7 +36,6 @@ public class ServicioCrearReservaTest {
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
-
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(true);
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
@@ -49,7 +48,6 @@ public class ServicioCrearReservaTest {
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
-
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(false);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
         BasePrueba.assertThrows(() -> servicioCrearReserva.ejecutar(reserva), ExcepcionComboNoExiste.class,"El combo seleccionado no existe");
@@ -111,7 +109,6 @@ public class ServicioCrearReservaTest {
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
-
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(true);
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
@@ -130,7 +127,6 @@ public class ServicioCrearReservaTest {
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
-
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(true);
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
