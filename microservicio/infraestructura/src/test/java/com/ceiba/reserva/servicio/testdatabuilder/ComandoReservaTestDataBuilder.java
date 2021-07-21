@@ -22,7 +22,7 @@ public class ComandoReservaTestDataBuilder {
         this.fechaCreacionReserva = LocalDateTime.now();
         this.fechaReservacion = LocalDateTime.now();
         this.fechaExpiracion =LocalDateTime.now() ;
-        this.nombrePersonaReserva = "pepito";
+        this.nombrePersonaReserva = "antonio";
         this.idPersonaReserva = "12345678";
         this.telefonoPersonReserva = "3240654";
         this.direccionPersonaReserva = "cra. 20";
@@ -31,6 +31,15 @@ public class ComandoReservaTestDataBuilder {
         this.id = id;
         return this;
     }
+    public ComandoReservaTestDataBuilder conNombrePersona(String nombrePersonaReserva){
+        this.nombrePersonaReserva = nombrePersonaReserva;
+        return this;
+    }
+    public ComandoReservaTestDataBuilder conIdPersona(String idPersonaReserva){
+        this.idPersonaReserva = idPersonaReserva;
+        return this;
+    }
+
 
     public ComandoReserva build(){
         return new ComandoReserva(id,idCombo,precioFinalReserva,fechaCreacionReserva,fechaReservacion,

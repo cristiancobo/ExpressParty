@@ -28,6 +28,9 @@ public class DaoReservaMysql implements DaoReserva {
     @SqlStatement(namespace = "reserva", value = "encontrar_fecha_creacion_reserva")
     private static String sqlEncontrarFechaCreacion;
 
+    @SqlStatement(namespace = "reserva", value = "encontrar_reserva_por_id")
+    private static String sqlEncontrarReservaPorId;
+
     public DaoReservaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -52,6 +55,13 @@ public class DaoReservaMysql implements DaoReserva {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id",id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlEncontrarFechaCreacion,paramSource, new MapeoFechaCreacion());
+    }
+
+    @Override
+    public DtoReserva obtenerReservaPorId(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id",id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlEncontrarReservaPorId,paramSource ,new MapeoReserva());
     }
 
 

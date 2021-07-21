@@ -1,0 +1,1 @@
+select * from combo where id = :id

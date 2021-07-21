@@ -31,4 +31,6 @@ public interface DaoReserva {
      */
     public LocalDateTime encontrarFechaCreacionReserva(Long id);
 
+    public DtoReserva obtenerReservaPorId(Long id);
+
 }

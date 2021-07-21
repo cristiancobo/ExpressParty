@@ -13,4 +13,6 @@ public interface DaoCombo {
      * @return
      */
     List<DtoCombo> listar();
+
+    DtoCombo encontrarComboPorId(Long id);
 }
