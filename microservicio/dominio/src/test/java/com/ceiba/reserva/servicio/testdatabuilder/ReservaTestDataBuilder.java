@@ -17,6 +17,7 @@ public class ReservaTestDataBuilder {
     private String direccionPersonaReserva;
 
     public ReservaTestDataBuilder() {
+        this.id = 1L;
         this.idCombo = 1L;
         this.precioFinalReserva=100000;
         this.fechaCreacionReserva = LocalDateTime.now();
