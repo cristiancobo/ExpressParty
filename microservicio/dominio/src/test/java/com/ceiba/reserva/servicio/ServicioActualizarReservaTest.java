@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class ServicioActualizarReservaTest {
 
     @Test
-    public void validarEstaVigenteParaActualizarReserva() {
+    public void validarEstaVigenteParaActualizarReservaExedeTiempo() {
         Reserva reserva = new ReservaTestDataBuilder().build();
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
         LocalDateTime fecha = LocalDateTime.of(2021,07,21,12,10,12);
@@ -42,7 +42,19 @@ public class ServicioActualizarReservaTest {
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
         ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva, daoReserva);
         BasePrueba.assertThrows(()-> servicioActualizarReserva.ejecutar(reserva),ExcepcionNoExisteReserva.class, "La reserva que intenta actualizar no existe");
-
-
     }
+
+    @Test
+    public void validarActualizarReservaCorrectamente(){
+        Reserva reserva = new ReservaTestDataBuilder().build();
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
+        Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(daoReserva.encontrarFechaCreacionReserva(Mockito.anyLong())).thenReturn(LocalDateTime.now());
+        Mockito.doNothing().when(repositorioReserva).eliminar(Mockito.anyLong());
+        ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva, daoReserva);
+        servicioActualizarReserva.ejecutar(reserva);
+        Mockito.verify(repositorioReserva,Mockito.times(1)).actualizar(Mockito.any());
+    }
+
 }

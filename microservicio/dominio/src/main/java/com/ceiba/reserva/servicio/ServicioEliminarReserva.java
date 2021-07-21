@@ -24,7 +24,7 @@ public class ServicioEliminarReserva {
     }
 
     public void ejecutar(Long id) {
-             verficarExistenciaReserva(id);
+           verficarExistenciaReserva(id);
            estaVigenteParaCancelarReserva(id);
             this.repositorioReserva.eliminar(id);
     }
