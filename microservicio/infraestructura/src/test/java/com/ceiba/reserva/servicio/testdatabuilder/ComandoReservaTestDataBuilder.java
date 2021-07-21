@@ -27,6 +27,10 @@ public class ComandoReservaTestDataBuilder {
         this.telefonoPersonReserva = "3240654";
         this.direccionPersonaReserva = "cra. 20";
     }
+    public ComandoReservaTestDataBuilder conId(Long id){
+        this.id = id;
+        return this;
+    }
 
     public ComandoReserva build(){
         return new ComandoReserva(id,idCombo,precioFinalReserva,fechaCreacionReserva,fechaReservacion,

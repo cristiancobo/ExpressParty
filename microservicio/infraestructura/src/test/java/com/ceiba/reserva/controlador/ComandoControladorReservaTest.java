@@ -29,11 +29,18 @@ public class ComandoControladorReservaTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private MockMvc mocMvc;
+    private MockMvc mockMvc;
 
 
     @Test
     public void crear() throws Exception{
+        ComandoReserva comandoReserva = new ComandoReservaTestDataBuilder().build();
+
+        mockMvc.perform(post("/reservas")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(comandoReserva)))
+                .andExpect(status().isCreated())
+                .andExpect(content().json("{'valor': 2}"));
 
     }
 
