@@ -27,6 +27,13 @@ public class ConsultaControladorReservaTest {
 
     @Test
     public void listar() throws Exception {
+        // arrange
+
+        // act - assert
+        mocMvc.perform(get("/reservas")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
 
     }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class MapeoFechaCreacion implements RowMapper<LocalDateTime>, MapperResult {
     @Override
     public LocalDateTime mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        LocalDateTime fecha = extraerLocalDateTime(resultSet,"fecha_creacion");
-        return fecha;
+
+        return extraerLocalDateTime(resultSet,"fecha_creacion");
     }
 }

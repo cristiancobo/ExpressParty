@@ -22,7 +22,6 @@ public class Combo {
         this.nombre = nombre;
         this.precio = precio;
     }
-    //TODO: Validaciones que ayuden a limitar reglas de negocio.
 
 
 

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class MapeoUltimaFechaReservaPersona  implements RowMapper<LocalDateTime>, MapperResult {
     @Override
     public LocalDateTime mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        LocalDateTime fecha =  extraerLocalDateTime(resultSet,"fecha_expiracion");
-        return fecha;
+
+        return extraerLocalDateTime(resultSet,"fecha_expiracion");
     }
 }

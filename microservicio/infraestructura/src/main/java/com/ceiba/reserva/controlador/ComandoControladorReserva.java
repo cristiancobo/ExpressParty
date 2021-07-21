@@ -44,6 +44,6 @@ public class ComandoControladorReserva {
     public ResponseEntity<Long> actualizar(@RequestBody ComandoReserva comandoReserva, @PathVariable Long id) {
         comandoReserva.setId(id);
         manejadorActualizarReserva.ejecutar(comandoReserva);
-        return new ResponseEntity<Long>( id, HttpStatus.OK);
+        return new ResponseEntity<>( id, HttpStatus.OK);
     }
 }

@@ -7,8 +7,6 @@ import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Repository
 public class RepositorioReservaMysql implements RepositorioReserva {

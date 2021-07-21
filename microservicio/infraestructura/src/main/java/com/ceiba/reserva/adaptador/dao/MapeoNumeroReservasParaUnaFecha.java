@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class MapeoNumeroReservasParaUnaFecha implements RowMapper<Integer>, MapperResult {
     @Override
     public Integer mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        int numeroReservas = resultSet.getInt("count(*)");
-        return numeroReservas;
+
+        return  resultSet.getInt("count(*)");
     }
 }

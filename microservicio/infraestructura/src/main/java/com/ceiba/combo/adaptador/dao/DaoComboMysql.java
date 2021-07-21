@@ -4,7 +4,6 @@ import com.ceiba.combo.modelo.dto.DtoCombo;
 import com.ceiba.combo.puerto.dao.DaoCombo;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
-import com.ceiba.reserva.adaptador.dao.MapeoReserva;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
