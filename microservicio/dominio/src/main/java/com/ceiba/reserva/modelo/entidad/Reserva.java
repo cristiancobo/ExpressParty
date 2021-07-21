@@ -14,6 +14,16 @@ public class Reserva {
     private static final String ID_COMBO_OBLIGATORIO = "El tipo de combo es obligatorio";
     private static final String TELEFONO_PERSONA_OBLIGATORIO = "El telefono es obligatorio";
     private static final String DIRECCION_PERSONA_OBLIGATORIO = "La dirección es obligatoria";
+    private static final String FECHA_DE_RESERVA_NO_PUEDE_SER_MENOR_A_LA_ACTUAL = "La fecha de reservación no puede ser menor a la actual";
+    private static final String EL_PRECIO_RESERVA_NO_PUEDE_SER_NEGATIVO = "El precio de la reserva es incorrecto. No puede ser negativo";
+    private static final int ID_PERSONA_MAXIMA_LONGITUD = 12;
+    private static final int ID_PERSONA_MINIMA_LONGITUD = 8;
+    private static final int NOMBRE_PERSONA_MAXIMA_LONGITUD = 20;
+    private static final int NOMBRE_PERSONA_MINIMA_LONGITUD = 2;
+    private static final int TELEFONO_PERSONA_MAXIMA_LONGITUD = 12;
+    private static final int TELEFONO_PERSONA_MINIMA_LONGITUD = 7;
+    private static final int DIRECCION_PERSONA_MAXIMA_LONGITUD = 20;
+    private static final int DIRECCION_PERSONA_MINIMA_LONGITUD = 5;
 
     private static final String FECHA_RESERVA = "La fecha de reservación es obligatoria";
 
