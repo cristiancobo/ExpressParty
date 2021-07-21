@@ -26,16 +26,9 @@ public class ConsultaControladorComboTest {
     private MockMvc mocMvc;
 
     @Test
-    public void listar()  throws Exception{
-        // arrange
-
-        // act - assert
-        mocMvc.perform(get("/combos")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].nombre", is("combo 1")));
+    public void listar(){
 
     }
+
 }
 

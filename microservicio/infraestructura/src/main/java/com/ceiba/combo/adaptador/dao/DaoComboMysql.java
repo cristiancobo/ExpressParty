@@ -19,8 +19,6 @@ public class DaoComboMysql implements DaoCombo {
     @SqlStatement(namespace = "combo", value = "listar")
     private static String sqlListar;
 
-
-
     public DaoComboMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }

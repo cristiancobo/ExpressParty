@@ -4,6 +4,7 @@ import com.ceiba.combo.puerto.repositorio.RepositorioCombo;
 import com.ceiba.combo.servicio.ServicioActualizarCombo;
 import com.ceiba.combo.servicio.ServicioCrearCombo;
 import com.ceiba.combo.servicio.ServicioEliminarCombo;
+import com.ceiba.reserva.puerto.dao.DaoReserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.ServicioActualizarReserva;
 import com.ceiba.reserva.servicio.ServicioCrearReserva;
@@ -28,16 +29,16 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearReserva servicioCrearReserva(RepositorioReserva repositorioReserva, RepositorioCombo repositorioCombo){
-        return new ServicioCrearReserva(repositorioReserva, repositorioCombo);
+    public ServicioCrearReserva servicioCrearReserva(RepositorioReserva repositorioReserva, RepositorioCombo repositorioCombo, DaoReserva daoReserva){
+        return new ServicioCrearReserva(repositorioReserva, repositorioCombo, daoReserva);
     }
     @Bean
     public ServicioActualizarReserva servicioActualizarReserva(RepositorioReserva repositorioReserva){
         return new ServicioActualizarReserva(repositorioReserva);
     }
     @Bean
-    public ServicioEliminarReserva servicioEliminarReserva(RepositorioReserva repositorioReserva){
-        return new ServicioEliminarReserva(repositorioReserva);
+    public ServicioEliminarReserva servicioEliminarReserva(RepositorioReserva repositorioReserva, DaoReserva daoReserva){
+        return new ServicioEliminarReserva(repositorioReserva, daoReserva);
     }
 
 }
