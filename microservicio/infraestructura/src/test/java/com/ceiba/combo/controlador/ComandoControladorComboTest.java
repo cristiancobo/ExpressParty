@@ -39,19 +39,44 @@ public class ComandoControladorComboTest {
     @Autowired
     private MockMvc mocMvc;
 
-
     @Test
-    public void crear(){
+
+    public void crear() throws Exception{
+        // arrange
+       ComandoCombo comandoCombo = new ComandoComboTestDataBuilder().build();
+
+        // act - assert
+        mocMvc.perform(post("/combos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(comandoCombo)))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{'valor': 2}"));
 
     }
+
     @Test
-    public void actualizar() {
+    public void actualizar() throws Exception{
+        // arrange
+        Long id = 2L;
+        ComandoCombo comandoCombo = new ComandoComboTestDataBuilder().build();
 
-
+        // act - assert
+        mocMvc.perform(put("/combos/{id}",id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(comandoCombo)))
+                .andExpect(status().isOk());
     }
 
     @Test
-    public void eliminar()  {
+    public void eliminar() throws Exception {
+        // arrange
+        Long id = 2L;
 
+        // act - assert
+        mocMvc.perform(delete("/combos/{id}",id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
+
 }
