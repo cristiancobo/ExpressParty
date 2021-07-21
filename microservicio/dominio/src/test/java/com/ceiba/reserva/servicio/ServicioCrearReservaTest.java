@@ -3,6 +3,7 @@ package com.ceiba.reserva.servicio;
 import com.ceiba.BasePrueba;
 import com.ceiba.combo.puerto.repositorio.RepositorioCombo;
 import com.ceiba.dominio.excepcion.ExcepcionComboNoExiste;
+import com.ceiba.dominio.excepcion.ExcepcionTopeNumeroReservasFecha;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.dao.DaoReserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
@@ -21,10 +22,7 @@ import java.util.Calendar;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ServicioCrearReserva.class)
-@PowerMockIgnore("jdk.internal.reflect.*")
 public class ServicioCrearReservaTest {
-
-
 
     @Test
     public void  validarPrecioBaseComboExistenteParaReserva(){
@@ -77,6 +75,28 @@ public class ServicioCrearReservaTest {
         Assert.assertEquals("pepito",reserva.getNombrePersonaReserva() );
         Assert.assertEquals("12345678",reserva.getIdPersonaReserva() );
         Assert.assertTrue(reserva.getPrecioFinalReserva() == 80750);
+    }
+    @Test
+    public void ValidarCantidadReservasParaFechaMayor4(){
+        Reserva reserva = new ReservaTestDataBuilder().build();
+        PowerMockito.spy(LocalDateTime.class);
+        PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,19,12,21,12));
+        PowerMockito.spy(Calendar.class);
+        Calendar calentarioActual = Calendar.getInstance();
+        calentarioActual.set(2021, Calendar.JULY, 19 ,12,21,12);
+        PowerMockito.when(Calendar.getInstance()).thenReturn(calentarioActual);
+        RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
+        LocalDateTime fecha = LocalDateTime.of(2021,07,21,20,20,20);
+        Mockito.when(daoReserva.encontrarUltimaFechaReservaPorIdPersona(Mockito.anyString())).thenReturn(fecha);
+        Mockito.when(repositorioReserva.existeReservaConIdPersona(Mockito.anyString())).thenReturn(true);
+        Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
+        Mockito.when(daoReserva.numeroReservasParaUnaFecha(Mockito.any())).thenReturn(7);
+        ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
+        BasePrueba.assertThrows(() -> servicioCrearReserva.ejecutar(reserva), ExcepcionTopeNumeroReservasFecha.class,"No es posible realizar una reserva para esta fecha. Elige una nueva");
+
     }
     @Test
     public void validarDescuentoPorVariasReservasEnDiaHabilExistoso(){
