@@ -24,6 +24,8 @@ import java.util.Calendar;
 @PowerMockIgnore("jdk.internal.reflect.*")
 public class ServicioCrearReservaTest {
 
+
+
     @Test
     public void  validarPrecioBaseComboExistenteParaReserva(){
         Reserva reserva = new ReservaTestDataBuilder().build();
@@ -40,7 +42,7 @@ public class ServicioCrearReservaTest {
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
         servicioCrearReserva.ejecutar(reserva);
-        Assert.assertEquals(95000.0,reserva.getPrecioFinalReserva(),0);
+        Assert.assertTrue(reserva.getPrecioFinalReserva() == 95000);
     }
     @Test
     public void  validarPrecioBaseComboNoExistenteParaReserva(){
@@ -74,7 +76,7 @@ public class ServicioCrearReservaTest {
         servicioCrearReserva.ejecutar(reserva);
         Assert.assertEquals("pepito",reserva.getNombrePersonaReserva() );
         Assert.assertEquals("12345678",reserva.getIdPersonaReserva() );
-        Assert.assertEquals(80750,reserva.getPrecioFinalReserva(),0);
+        Assert.assertTrue(reserva.getPrecioFinalReserva() == 80750);
     }
     @Test
     public void validarDescuentoPorVariasReservasEnDiaHabilExistoso(){
@@ -95,7 +97,7 @@ public class ServicioCrearReservaTest {
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
         servicioCrearReserva.ejecutar(reserva);
-        Assert.assertEquals(80750,reserva.getPrecioFinalReserva(),0);
+        Assert.assertTrue(reserva.getPrecioFinalReserva() == 80750);
     }
     @Test
     public void validarDiaHabilParaDescuento(){
@@ -113,7 +115,7 @@ public class ServicioCrearReservaTest {
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
         servicioCrearReserva.ejecutar(reserva);
-        Assert.assertEquals(95000,reserva.getPrecioFinalReserva(),0);
+        Assert.assertTrue(reserva.getPrecioFinalReserva() == 95000);
     }
     @Test
     public void validarDiaFestivoParaSobreCosto(){
@@ -131,7 +133,7 @@ public class ServicioCrearReservaTest {
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
         servicioCrearReserva.ejecutar(reserva);
-        Assert.assertEquals(107000,reserva.getPrecioFinalReserva(),0);
+        Assert.assertTrue(reserva.getPrecioFinalReserva() == 107000);
     }
     @Test
     public void validarDiaFinSemanaParaSobreCosto(){
@@ -149,6 +151,7 @@ public class ServicioCrearReservaTest {
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
         servicioCrearReserva.ejecutar(reserva);
+        Assert.assertTrue(reserva.getPrecioFinalReserva() == 107000);
     }
 
 
