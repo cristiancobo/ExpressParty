@@ -28,19 +28,6 @@ public interface RepositorioReserva {
      */
     public void eliminar(Long id);
 
-    /**
-     * Método para encontrar cuentas reservas hay en una fecha especifica
-     * @param localDate
-     * @return
-     */
-    public int numeroReservasParaUnaFecha(LocalDate localDate);
-
-    /**
-     * Método para encontrar la última fehca de expiración de una reserva dado la identificación de una persona
-     * @param idPersonaReserva
-     * @return
-     */
-    public LocalDateTime encontrarUltimaFechaReservaPorIdPersona(String idPersonaReserva);
 
     /**
      * Método para verificar si existe o no una reserva
@@ -49,12 +36,7 @@ public interface RepositorioReserva {
      */
     public boolean existeReservaConIdPersona(String idPersonaReserva);
 
-    /**
-     * Método para encontrar la fecha de creación de una reserva
-     * @param id
-     * @return
-     */
-    public LocalDateTime encontrarFechaCreacionReserva(Long id);
+
 
     /**
      * Método para verificar si existe una reserva o no por su id

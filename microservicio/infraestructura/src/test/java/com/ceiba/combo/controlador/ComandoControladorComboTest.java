@@ -41,45 +41,17 @@ public class ComandoControladorComboTest {
 
 
     @Test
-    public void crear() throws Exception{
-        // arrange
-        ComandoCombo comandoCombo = new ComandoComboTestDataBuilder().build();
+    public void crear(){
 
-        // act - assert
-        mocMvc.perform(post("/combos")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(comandoCombo)))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 2}"));
-        Optional<DtoCombo> opCombo = daoCombo.listar().stream().filter(combo -> combo.getId().equals(2L)).findFirst();
-        Assert.assertTrue(opCombo.isPresent());
     }
     @Test
-    public void actualizar() throws Exception{
-        // arrange
-        Long id = 2L;
-        ComandoCombo comandoCombo = new ComandoComboTestDataBuilder().build();
-
-        // act - assert
-        mocMvc.perform(put("/combos/{id}",id)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(comandoCombo)))
-                .andExpect(status().isOk());
+    public void actualizar() {
 
 
     }
 
     @Test
-    public void eliminar() throws Exception {
-        // arrange
-        Long id = 2L;
+    public void eliminar()  {
 
-        // act - assert
-        mocMvc.perform(delete("/combos/{id}",id)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-        Optional<DtoCombo> opCombo = daoCombo.listar().stream().filter(combo -> combo.getId().equals(id)).findFirst();
-        Assert.assertFalse(opCombo.isPresent());
     }
 }

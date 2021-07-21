@@ -15,19 +15,6 @@ import java.time.LocalDateTime;
 
 public class ServicioCrearComboTest {
 
-
-
-    @Test
-    public void validarPropiedadNombreObligarioSinValor(){
-        ComboTestDataBuilder comboTestDataBuilder = new ComboTestDataBuilder().conNombre(null);
-        BasePrueba.assertThrows(()-> comboTestDataBuilder.build(), ExcepcionValorObligatorio.class, "El nombre del combo es obligatorio");
-    }
-    @Test
-    public void validarPropiedadPrecioObligatorioSinValor(){
-        ComboTestDataBuilder comboTestDataBuilder = new ComboTestDataBuilder().conPrecio(null);
-        BasePrueba.assertThrows(()-> comboTestDataBuilder.build(), ExcepcionValorObligatorio.class,"El precio del combo es obligatorio");
-    }
-
     @Test
     public void validarTodasLasPropiedadesComboConValor(){
         Combo combo = new ComboTestDataBuilder().build();

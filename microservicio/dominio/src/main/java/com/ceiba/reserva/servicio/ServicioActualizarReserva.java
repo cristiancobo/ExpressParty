@@ -23,7 +23,7 @@ public class ServicioActualizarReserva {
     public void ejecutar(Reserva reserva){
 
             verficiarExistenciaReserva(reserva.getId());
-            estaVigenteParaActualizarReserva(reserva.getId());
+           // estaVigenteParaActualizarReserva(reserva.getId());
             this.repositorioReserva.actualizar(reserva);
 
 
@@ -34,6 +34,7 @@ public class ServicioActualizarReserva {
             throw new ExcepcionNoExisteReserva(RESERVA_NO_EXISTE);
         }
     }
+    /**
     public void estaVigenteParaActualizarReserva(Long id){
         LocalDateTime fechaActual = LocalDateTime.now();
         LocalDateTime fechaReservacion = this.repositorioReserva.encontrarFechaCreacionReserva(id);
@@ -44,4 +45,5 @@ public class ServicioActualizarReserva {
         }
 
     }
+     **/
 }

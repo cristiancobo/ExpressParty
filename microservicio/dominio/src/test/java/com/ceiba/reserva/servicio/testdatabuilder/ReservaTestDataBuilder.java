@@ -22,7 +22,7 @@ public class ReservaTestDataBuilder {
         this.fechaCreacionReserva = LocalDateTime.now();
         this.fechaReservacion = LocalDateTime.of(2021,07,21,19,20,10);
         this.fechaExpiracion = LocalDateTime.of(2021,07,23,19,20,10);
-        this.nombrePersonaReserva = "cristian cobo";
+        this.nombrePersonaReserva = "pepito";
         this.idPersonaReserva="12345678";
         this.telefonoPersonReserva="320667543";
         this.direccionPersonaReserva="cra 45 # 67a - 56";

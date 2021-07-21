@@ -3,6 +3,7 @@ package com.ceiba.reserva.servicio;
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionNoExisteReserva;
 import com.ceiba.reserva.modelo.entidad.Reserva;
+import com.ceiba.reserva.puerto.dao.DaoReserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.testdatabuilder.ReservaTestDataBuilder;
 import org.junit.Test;
@@ -14,9 +15,10 @@ public class ServicioActualizarReservaTest {
     @Test
     public void validarActualizarReservaCorrectamente(){
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
+        DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
         Reserva reserva = new ReservaTestDataBuilder().build();
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
-        Mockito.when(repositorioReserva.encontrarFechaCreacionReserva(Mockito.anyLong())).thenReturn(LocalDateTime.now());
+        Mockito.when(daoReserva.encontrarFechaCreacionReserva(Mockito.anyLong())).thenReturn(LocalDateTime.now());
         Mockito.doNothing().when(repositorioReserva).actualizar(reserva);
         ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
         servicioActualizarReserva.ejecutar(reserva);

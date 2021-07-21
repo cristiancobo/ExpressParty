@@ -23,18 +23,9 @@ public class RepositorioReservaMysql implements RepositorioReserva {
 
     @SqlStatement(namespace="reserva", value="eliminar")
     private static String sqlEliminar;
-
-    @SqlStatement(namespace="reserva", value="numero_reservas_para_fecha")
-    private static String sqlNumeroReservasParaFecha;
-
-    @SqlStatement(namespace="reserva", value="encontrar_ultima_fecha_reserva_por_id_persona")
-    private static String sqlUltimaFechaReservaPorIdPersona;
-
+    
     @SqlStatement(namespace="reserva", value="existe_reserva_por_id_persona")
     private static String sqlExisteReservaIdPersona;
-
-    @SqlStatement(namespace="reserva", value="encontrar_fecha_creacion_reserva")
-    private static String sqlEncontrarFechaCreacionReserva;
 
     @SqlStatement(namespace="reserva", value="existe")
     private static String sqlExiste;
@@ -62,33 +53,11 @@ public class RepositorioReservaMysql implements RepositorioReserva {
     }
 
     @Override
-    public int numeroReservasParaUnaFecha(LocalDate fecha) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("fecha",fecha);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlNumeroReservasParaFecha,paramSource, Integer.class);
-    }
-
-    @Override
-    public LocalDateTime encontrarUltimaFechaReservaPorIdPersona(String idPersonaReserva) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("idPersonaReserva",idPersonaReserva);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlUltimaFechaReservaPorIdPersona,paramSource, LocalDateTime.class);
-
-    }
-
-    @Override
     public boolean existeReservaConIdPersona(String idPersonaReserva) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("idPersonaReserva",idPersonaReserva);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteReservaIdPersona,paramSource, Boolean.class);
 
-    }
-
-    @Override
-    public LocalDateTime encontrarFechaCreacionReserva(Long id) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id",id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlEncontrarFechaCreacionReserva,paramSource, LocalDateTime.class);
     }
 
     @Override
