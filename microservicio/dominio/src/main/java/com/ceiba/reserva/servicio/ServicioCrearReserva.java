@@ -52,7 +52,7 @@ public class ServicioCrearReserva {
          }
 
     }
-    public void validarDiaHabilParaDescuento(Reserva reserva){
+    private void validarDiaHabilParaDescuento(Reserva reserva){
         LocalDateTime fechaActual = LocalDateTime.now();
         GestionHorarios gestionHorarios = new GestionHorarios();
         boolean esDiaFestivo = gestionHorarios.esFestivo(Calendar.getInstance().get(Calendar.MONTH),
@@ -67,11 +67,11 @@ public class ServicioCrearReserva {
         }
 
     }
-    public LocalDateTime establecerFechaDeCreacionReserva(Reserva reserva){
+    private LocalDateTime establecerFechaDeCreacionReserva(Reserva reserva){
         reserva.establecerFechaCreacionReserva(LocalDateTime.now());
         return reserva.getFechaCreacionReserva();
     }
-    public LocalDateTime establecerFechaDeExpiracionReserva(Reserva reserva){
+    private LocalDateTime establecerFechaDeExpiracionReserva(Reserva reserva){
         GestionHorarios gestionHorarios = new GestionHorarios();
         Date fechaReservacionConvertida = java.util.Date
                 .from(reserva.getFechaReservacion().atZone(ZoneId.systemDefault())
@@ -80,7 +80,7 @@ public class ServicioCrearReserva {
         return reserva.getFechaExpiracion();
     }
 
-    public int verificarCantidadReservasParaFecha(Reserva reserva){
+    private int verificarCantidadReservasParaFecha(Reserva reserva){
 
         if( this.daoReserva.numeroReservasParaUnaFecha(reserva.getFechaReservacion().toLocalDate()) >= NUMERO_MAXIMO_RESERVAS_PARA_UNA_FECHA){
            throw  new ExcepcionTopeNumeroReservasFecha(TOPE_NUMERO_RESERVAS);
@@ -88,7 +88,7 @@ public class ServicioCrearReserva {
         return this.daoReserva.numeroReservasParaUnaFecha(reserva.getFechaReservacion().toLocalDate());
     }
 
-    public void verficarDescuentoPorVariasReservas(Reserva reserva){
+    private void verficarDescuentoPorVariasReservas(Reserva reserva){
         if(this.repositorioReserva.existeReservaConIdPersona(reserva.getIdPersonaReserva()))
         {
             LocalDateTime ultimaFechaReservacion = this.daoReserva.encontrarUltimaFechaReservaPorIdPersona(reserva.getIdPersonaReserva());

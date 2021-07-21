@@ -29,7 +29,7 @@ public class ServicioEliminarReserva {
             this.repositorioReserva.eliminar(id);
     }
 
-    public void estaVigenteParaCancelarReserva(Long id){
+    private void estaVigenteParaCancelarReserva(Long id){
 
         LocalDateTime fechaActual = LocalDateTime.now();
         LocalDateTime fechaReservacion = this.daoReserva.encontrarFechaCreacionReserva(id);
@@ -40,7 +40,7 @@ public class ServicioEliminarReserva {
         }
     }
 
-    public void verficarExistenciaReserva(Long id){
+    private void verficarExistenciaReserva(Long id){
         if(!this.repositorioReserva.existe(id)){
             throw new ExcepcionNoExisteReserva(RESERVA_NO_EXISTE);
         }

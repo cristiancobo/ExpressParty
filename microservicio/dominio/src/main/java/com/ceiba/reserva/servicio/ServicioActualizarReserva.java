@@ -32,7 +32,7 @@ public class ServicioActualizarReserva {
 
     }
 
-    public void verficarExistenciaReserva(Reserva reserva){
+    private void verficarExistenciaReserva(Reserva reserva){
         Long id  = reserva.getId();
         boolean existe = this.repositorioReserva.existe(id);
         if(!existe){
@@ -41,7 +41,7 @@ public class ServicioActualizarReserva {
     }
 
 
-    public void estaVigenteParaActualizarReserva(Long id){
+    private void estaVigenteParaActualizarReserva(Long id){
         LocalDateTime fechaActual = LocalDateTime.now();
         LocalDateTime fechaReservacion = this.daoReserva.encontrarFechaCreacionReserva(id);
         LocalDateTime tiempo = LocalDateTime.from( fechaReservacion );
