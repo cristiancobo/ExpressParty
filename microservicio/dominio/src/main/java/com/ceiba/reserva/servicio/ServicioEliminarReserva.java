@@ -8,6 +8,7 @@ import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+
 public class ServicioEliminarReserva {
 
     private final RepositorioReserva repositorioReserva;
@@ -23,12 +24,13 @@ public class ServicioEliminarReserva {
     }
 
     public void ejecutar(Long id) {
-             verficiarExistenciaReserva(id);
-           //estaVigenteParaCancelarReserva(id);
+             verficarExistenciaReserva(id);
+           estaVigenteParaCancelarReserva(id);
             this.repositorioReserva.eliminar(id);
     }
 
     public void estaVigenteParaCancelarReserva(Long id){
+
         LocalDateTime fechaActual = LocalDateTime.now();
         LocalDateTime fechaReservacion = this.daoReserva.encontrarFechaCreacionReserva(id);
         LocalDateTime tiempo = LocalDateTime.from( fechaReservacion );
@@ -36,10 +38,9 @@ public class ServicioEliminarReserva {
         if(minutosTranscurridos >= TIEMPO_MINUTOS_MAXIMO_CANCELACION_RESERVA ){
             throw new ExcepcionTiempoExcedido(TIEMPO_EXCEDIDO);
         }
-
     }
 
-    public void verficiarExistenciaReserva(Long id){
+    public void verficarExistenciaReserva(Long id){
         if(!this.repositorioReserva.existe(id)){
             throw new ExcepcionNoExisteReserva(RESERVA_NO_EXISTE);
         }
