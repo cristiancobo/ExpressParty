@@ -21,8 +21,13 @@ public class ValidadorArgumento {
         }
     }
     
-    public static void validarLongitud(String valor,int longitud,String mensaje){
+    public static void validarLongitudMinima(String valor,int longitud,String mensaje){
         if(valor.length() < longitud){
+            throw new ExcepcionLongitudValor(mensaje);
+        }
+    }
+    public static void validarLongitudMaxima(String valor,int longitud,String mensaje){
+        if(valor.length() > longitud){
             throw new ExcepcionLongitudValor(mensaje);
         }
     }

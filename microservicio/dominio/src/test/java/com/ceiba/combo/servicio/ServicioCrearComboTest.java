@@ -1,18 +1,11 @@
 package com.ceiba.combo.servicio;
 
-import com.ceiba.BasePrueba;
 import com.ceiba.combo.modelo.entidad.Combo;
 import com.ceiba.combo.puerto.repositorio.RepositorioCombo;
 import com.ceiba.combo.servicio.testdatabuilder.ComboTestDataBuilder;
-import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
-import com.ceiba.reserva.servicio.testdatabuilder.ReservaTestDataBuilder;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import java.time.LocalDateTime;
-
 public class ServicioCrearComboTest {
 
     @Test
