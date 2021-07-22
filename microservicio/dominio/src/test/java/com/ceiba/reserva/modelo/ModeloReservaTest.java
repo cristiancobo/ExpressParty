@@ -15,8 +15,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.time.LocalDateTime;
 
-@RunWith(PowerMockRunner.class)
-@PrepareOnlyThisForTest(Reserva.class)
 public class ModeloReservaTest {
     @Test
     public void validarPropiedadIdComboObligatorioSinValor(){
@@ -91,9 +89,7 @@ public class ModeloReservaTest {
     }
     @Test
     public void validarPropiedadFechaReservacionNoFutura(){
-        PowerMockito.spy(LocalDateTime.class);
-        PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,21,12,21,12));
-        ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder().conFechaReserva(LocalDateTime.of(2021,07,19,12,21,12));
+        ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder().conFechaReserva(LocalDateTime.of(1900,07,19,12,21,12));
         BasePrueba.assertThrows(()-> reservaTestDataBuilder.build(), ExcepcionValorInvalido.class, "La fecha para la reservación no puede ser menor a la actual");
     }
 }
