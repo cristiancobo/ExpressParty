@@ -11,10 +11,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.PrepareOnlyThisForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.time.LocalDateTime;
 @RunWith(PowerMockRunner.class)
+@PrepareOnlyThisForTest(ServicioActualizarReserva.class)
 public class ServicioActualizarReservaTest {
 
     @Test

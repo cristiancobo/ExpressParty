@@ -13,14 +13,14 @@ import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
 import org.junit.Assert;
-import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.PrepareOnlyThisForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.api.mockito.PowerMockito;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(ServicioCrearReserva.class)
+@PrepareOnlyThisForTest(ServicioCrearReserva.class)
 public class ServicioCrearReservaTest {
 
     @Test
@@ -141,19 +141,19 @@ public class ServicioCrearReservaTest {
         Reserva reserva = new ReservaTestDataBuilder().build();
         PowerMockito.spy(LocalDateTime.class);
         PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,20,12,21,12));
-        PowerMockito.spy(Calendar.class);
-        Calendar calentarioActual = Calendar.getInstance();
-        calentarioActual.set(2021, Calendar.JULY, 20 ,12,21,12);
-        PowerMockito.when(Calendar.getInstance()).thenReturn(calentarioActual);
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
         Mockito.when(repositorioCombo.existe(Mockito.anyLong())).thenReturn(true);
         Mockito.when(repositorioCombo.obtenerPrecioCombo(Mockito.anyLong())).thenReturn(100000.0);
+
         ServicioCrearReserva servicioCrearReserva = new ServicioCrearReserva(repositorioReserva,repositorioCombo, daoReserva);
         servicioCrearReserva.ejecutar(reserva);
         Assert.assertTrue(reserva.getPrecioFinalReserva() == 107000);
+
+
     }
+
     @Test
     public void validarDiaFinSemanaParaSobreCosto(){
         Reserva reserva = new ReservaTestDataBuilder().build();
@@ -172,6 +172,7 @@ public class ServicioCrearReservaTest {
         servicioCrearReserva.ejecutar(reserva);
         Assert.assertTrue(reserva.getPrecioFinalReserva() == 107000);
     }
+
 
 
 }

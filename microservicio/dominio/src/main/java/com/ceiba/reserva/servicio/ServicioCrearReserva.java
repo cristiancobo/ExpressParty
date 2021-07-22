@@ -55,9 +55,13 @@ public class ServicioCrearReserva {
     private void validarDiaHabilParaDescuento(Reserva reserva){
         LocalDateTime fechaActual = LocalDateTime.now();
         GestionHorarios gestionHorarios = new GestionHorarios();
-        boolean esDiaFestivo = gestionHorarios.esFestivo(Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        boolean esDiaFestivo = gestionHorarios.esFestivo(fechaActual.getMonthValue()-1,
+               fechaActual.getDayOfMonth());
+
+
         boolean esDiaHabil = (fechaActual.getDayOfWeek() != DayOfWeek.SATURDAY && fechaActual.getDayOfWeek() != DayOfWeek.SUNDAY)  && !esDiaFestivo;
+
+
         if (esDiaHabil){
             reserva.establecerPrecioComboReserva(reserva.getPrecioFinalReserva()-(reserva.getPrecioFinalReserva()*DESCUENTO_POR_DIA_HABIL));
         }else if(esDiaFestivo){
