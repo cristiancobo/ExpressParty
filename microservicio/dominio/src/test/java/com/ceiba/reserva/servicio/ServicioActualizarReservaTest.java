@@ -15,7 +15,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.time.LocalDateTime;
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(ServicioActualizarReserva.class)
 public class ServicioActualizarReservaTest {
 
     @Test
