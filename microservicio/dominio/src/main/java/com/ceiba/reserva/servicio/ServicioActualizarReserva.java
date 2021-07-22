@@ -45,7 +45,6 @@ public class ServicioActualizarReserva {
         LocalDateTime fechaActual = LocalDateTime.now();
         LocalDateTime fechaReservacion = this.daoReserva.encontrarFechaCreacionReserva(id);
         LocalDateTime tiempo = LocalDateTime.from( fechaReservacion );
-        System.out.println(tiempo);
         long minutosTranscurridos = tiempo.until( fechaActual, ChronoUnit.MINUTES );
         if(minutosTranscurridos >= TIEMPO_MINUTOS_MAXIMO_CANCELACION_RESERVA){
             throw new ExcepcionTiempoExcedido(TIEMPO_EXCEDIDO);

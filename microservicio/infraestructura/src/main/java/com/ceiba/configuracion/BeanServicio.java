@@ -23,6 +23,7 @@ public class BeanServicio {
     public ServicioActualizarCombo servicioActualizarCombo(RepositorioCombo repositorioCombo){
         return new ServicioActualizarCombo(repositorioCombo);
     }
+
     @Bean
     public ServicioEliminarCombo servicioEliminarCombo(RepositorioCombo repositorioCombo){
         return new ServicioEliminarCombo(repositorioCombo);

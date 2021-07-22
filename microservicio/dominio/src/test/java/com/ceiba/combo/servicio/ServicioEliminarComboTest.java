@@ -10,11 +10,13 @@ public class ServicioEliminarComboTest {
 
     @Test
     public void validarEliminarComboCorrectamente(){
+
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         Mockito.doNothing().when(repositorioCombo).eliminar(Mockito.anyLong());
 
         ServicioEliminarCombo servicioEliminarCombo = new ServicioEliminarCombo(repositorioCombo);
         servicioEliminarCombo.ejecutar(1L);
         Mockito.verify(repositorioCombo,Mockito.times(1)).eliminar(Mockito.anyLong());
+
     }
 }

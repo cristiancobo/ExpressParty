@@ -10,27 +10,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.api.mockito.PowerMockito;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(ServicioEliminarReserva.class)
-@PowerMockIgnore("jdk.internal.reflect.*")
 public class ServicioEliminarReservaTest {
 
     @Test
     public void validarEliminarReservaCuandoExistePeroExcedeTiempo(){
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
+        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         LocalDateTime fecha = LocalDateTime.of(2021,07,21,12,10,12);
         PowerMockito.when(daoReserva.encontrarFechaCreacionReserva(Mockito.anyLong())).thenReturn(fecha);
         PowerMockito.spy(LocalDateTime.class);
         PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,21,12,50,12));
-        RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
         ServicioEliminarReserva servicioEliminarReserva = new ServicioEliminarReserva(repositorioReserva,daoReserva);
         BasePrueba.assertThrows(()-> servicioEliminarReserva.ejecutar(1L), ExcepcionTiempoExcedido.class, "El tiempo para realizar la cancelación excedió");
@@ -45,8 +41,9 @@ public class ServicioEliminarReservaTest {
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
         BasePrueba.assertThrows(()-> servicioEliminarReserva.ejecutar(1L), ExcepcionNoExisteReserva.class, "La reserva que intenta eliminar no existe");
     }
+
     @Test
-    public void validarEliminarReservaCuandoExisteCorrectamente(){
+    public void ejecutar() {
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         DaoReserva daoReserva = Mockito.mock(DaoReserva.class);
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
@@ -56,5 +53,4 @@ public class ServicioEliminarReservaTest {
         servicioEliminarReserva.ejecutar(1L);
         Mockito.verify(repositorioReserva,Mockito.times(1)).eliminar(Mockito.anyLong());
     }
-
 }
