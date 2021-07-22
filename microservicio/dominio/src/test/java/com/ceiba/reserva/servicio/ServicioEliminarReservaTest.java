@@ -6,12 +6,12 @@ import com.ceiba.dominio.excepcion.ExcepcionNoExisteReserva;
 import com.ceiba.dominio.excepcion.ExcepcionTiempoExcedido;
 import com.ceiba.reserva.puerto.dao.DaoReserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.core.classloader.annotations.PrepareOnlyThisForTest;
+ import org.powermock.core.classloader.annotations.PrepareOnlyThisForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 
 @RunWith(PowerMockRunner.class)
 @PrepareOnlyThisForTest(ServicioEliminarReserva.class)
+@PowerMockRunnerDelegate()
 public class ServicioEliminarReservaTest {
 
     @Test
