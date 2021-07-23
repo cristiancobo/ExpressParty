@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
 import org.junit.Assert;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.core.classloader.annotations.PrepareOnlyThisForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.api.mockito.PowerMockito;
@@ -20,7 +21,8 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 
 @RunWith(PowerMockRunner.class)
-@PrepareOnlyThisForTest(ServicioCrearReserva.class)
+@PrepareForTest({Reserva.class,ServicioCrearReserva.class})
+
 public class ServicioCrearReservaTest {
 
     @Test
@@ -43,6 +45,8 @@ public class ServicioCrearReservaTest {
     }
     @Test
     public void  validarPrecioBaseComboNoExistenteParaReserva(){
+        PowerMockito.spy(LocalDateTime.class);
+        PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,19,12,21,12));
         Reserva reserva = new ReservaTestDataBuilder().build();
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
