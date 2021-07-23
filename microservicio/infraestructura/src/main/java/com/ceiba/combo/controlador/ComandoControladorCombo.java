@@ -8,6 +8,8 @@ import com.ceiba.combo.comando.manejador.ManejadorEliminarCombo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,8 +29,8 @@ public class ComandoControladorCombo {
     }
     @PostMapping
     @ApiOperation("Crear combo")
-    public ComandoRespuesta<Long> crear(@RequestBody ComandoCombo comandoCombo){
-        return manejadorCrearCombo.ejecutar(comandoCombo);
+    public ResponseEntity<ComandoRespuesta<Long>> crear(@RequestBody ComandoCombo comandoCombo){
+        return new ResponseEntity<>(manejadorCrearCombo.ejecutar(comandoCombo), HttpStatus.CREATED);
     }
     @DeleteMapping(value="/{id}")
     @ApiOperation("Eliminar combo")
@@ -39,9 +41,10 @@ public class ComandoControladorCombo {
 
     @PutMapping(value="/{id}")
     @ApiOperation("Actualizar combo")
-    public void actualizar(@RequestBody ComandoCombo comandoCombo, @PathVariable Long id) {
+    public ResponseEntity<Long> actualizar(@RequestBody ComandoCombo comandoCombo, @PathVariable Long id) {
         comandoCombo.setId(id);
-     //   manejadorActualizarCombo.ejecutar(comandoCombo);
+        manejadorActualizarCombo.ejecutar(comandoCombo);
+        return new ResponseEntity<>( id, HttpStatus.OK);
     }
 }
 

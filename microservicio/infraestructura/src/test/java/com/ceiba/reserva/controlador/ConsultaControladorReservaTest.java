@@ -10,8 +10,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.Is.isA;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,17 +27,23 @@ public class ConsultaControladorReservaTest {
 
 
     @Autowired
-    private MockMvc mocMvc;
+    private MockMvc mockMvc;
 
     @Test
-    public void listar() throws Exception {
-        // arrange
+    public void aValidarListar() throws Exception {
 
-        // act - assert
-        mocMvc.perform(get("/reservas")
+        mockMvc.perform(get("/reservas")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].nombrePersonaReserva", is("carla")))
+                .andExpect(jsonPath("$[0].precioFinalReserva", is(100000.0)))
+                .andExpect(jsonPath("$[1].nombrePersonaReserva", is("alberto")))
+                .andExpect(jsonPath("$[1].precioFinalReserva", is(200000.0)))
+                .andExpect(jsonPath("$[2].nombrePersonaReserva", is("mario")))
+                .andExpect(jsonPath("$[2].precioFinalReserva", is(300000.0)))
+                .andExpect(jsonPath("$[*].nombrePersonaReserva", containsInAnyOrder("carla", "alberto", "mario")))
+                .andExpect(jsonPath("$.*", isA(ArrayList.class)));
 
     }
 }

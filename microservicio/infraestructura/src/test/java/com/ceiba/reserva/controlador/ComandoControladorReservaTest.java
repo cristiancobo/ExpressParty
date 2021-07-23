@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@WebMvcTest(ComandoControladorCombo.class)
+@WebMvcTest(ComandoControladorReserva.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING	)
 public class ComandoControladorReservaTest {
 
@@ -48,7 +48,6 @@ public class ComandoControladorReservaTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(comandoReserva)))
                 .andExpect(status().isCreated())
-                .andExpect(content().json("{'valor': 2}"))
                 .andExpect(status().isCreated())
                 .andDo(resultado ->{
                         MvcResult mvcResult = mockMvc.perform((get("/reservas")
