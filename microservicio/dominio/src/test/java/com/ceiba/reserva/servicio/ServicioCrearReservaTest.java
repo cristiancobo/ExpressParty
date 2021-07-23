@@ -27,6 +27,7 @@ public class ServicioCrearReservaTest {
 
     @Test
     public void  validarPrecioBaseComboExistenteParaReserva(){
+
         Reserva reserva = new ReservaTestDataBuilder().build();
         PowerMockito.spy(LocalDateTime.class);
         PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,21,12,21,12));
