@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @WebMvcTest(ConsultaControladorReserva.class)
@@ -31,19 +32,14 @@ public class ConsultaControladorReservaTest {
 
     @Test
     public void aValidarListar() throws Exception {
-
         mockMvc.perform(get("/reservas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].nombrePersonaReserva", is("carla")))
-                .andExpect(jsonPath("$[0].precioFinalReserva", is(100000.0)))
                 .andExpect(jsonPath("$[1].nombrePersonaReserva", is("alberto")))
-                .andExpect(jsonPath("$[1].precioFinalReserva", is(200000.0)))
-                .andExpect(jsonPath("$[2].nombrePersonaReserva", is("mario")))
-                .andExpect(jsonPath("$[2].precioFinalReserva", is(300000.0)))
-                .andExpect(jsonPath("$[*].nombrePersonaReserva", containsInAnyOrder("carla", "alberto", "mario")))
-                .andExpect(jsonPath("$.*", isA(ArrayList.class)));
+                .andExpect(jsonPath("$[2].nombrePersonaReserva", is("mario")));
+
 
     }
 }

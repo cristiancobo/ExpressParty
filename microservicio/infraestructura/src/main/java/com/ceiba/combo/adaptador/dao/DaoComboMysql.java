@@ -23,6 +23,10 @@ public class DaoComboMysql implements DaoCombo {
     @SqlStatement(namespace = "combo", value = "encontrar_combo_por_id")
     private static String sqlEncontrarComboPorId;
 
+
+    @SqlStatement(namespace="combo", value="obtener_precio_combo")
+    private static String sqlObtenerPrecioCombo;
+
     public DaoComboMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -36,6 +40,13 @@ public class DaoComboMysql implements DaoCombo {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id",id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlEncontrarComboPorId,paramSource ,new MapeoCombo());
+    }
+
+    @Override
+    public double obtenerPrecioCombo(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtenerPrecioCombo,paramSource, Double.class);
     }
 
 }

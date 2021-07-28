@@ -28,8 +28,6 @@ public class RepositorioComboMysql implements RepositorioCombo {
     @SqlStatement(namespace="combo", value="existe")
     private static String sqlExiste;
 
-    @SqlStatement(namespace="combo", value="obtener_precio_combo")
-    private static String sqlObtenerPrecioCombo;
 
     public RepositorioComboMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -60,10 +58,5 @@ public class RepositorioComboMysql implements RepositorioCombo {
 
     }
 
-    @Override
-    public double obtenerPrecioCombo(Long id) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtenerPrecioCombo,paramSource, Double.class);
-    }
+
 }

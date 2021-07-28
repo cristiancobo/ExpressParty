@@ -32,6 +32,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         CODIGOS_ESTADO.put(ExcepcionTopeNumeroReservasFecha.class.getSimpleName(),HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionComboNoExiste.class.getSimpleName(),HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionNoExisteReserva.class.getSimpleName(),HttpStatus.BAD_REQUEST.value());
+        CODIGOS_ESTADO.put(ExcepcionTiempoExcedido.class.getSimpleName(),HttpStatus.BAD_REQUEST.value());
 
         
         

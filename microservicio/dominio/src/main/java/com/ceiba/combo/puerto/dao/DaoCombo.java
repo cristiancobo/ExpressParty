@@ -15,4 +15,11 @@ public interface DaoCombo {
     List<DtoCombo> listar();
 
     DtoCombo encontrarComboPorId(Long id);
+
+    /**
+     * Método para obtener el precio o valor de un combo
+     * @param id
+     * @return
+     */
+    public double obtenerPrecioCombo(Long id);
 }

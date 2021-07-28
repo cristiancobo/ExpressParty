@@ -1,5 +1,6 @@
 package com.ceiba.reserva.servicio;
 
+import com.ceiba.combo.puerto.dao.DaoCombo;
 import com.ceiba.combo.puerto.repositorio.RepositorioCombo;
 import com.ceiba.dominio.excepcion.ExcepcionComboNoExiste;
 import com.ceiba.dominio.excepcion.ExcepcionTopeNumeroReservasFecha;
@@ -18,6 +19,7 @@ public class ServicioCrearReserva {
     private final RepositorioReserva repositorioReserva;
     private final RepositorioCombo repositorioCombo;
     private final DaoReserva daoReserva;
+    private final DaoCombo daoCombo;
     private static final String TOPE_NUMERO_RESERVAS = "No es posible realizar una reserva para esta fecha. Elige una nueva";
     private static final String COMBO_NO_EXISTE = "El combo seleccionado no existe";
     private static final int NUMERO_MAXIMO_DIAS_RESERVACION = 2;
@@ -27,11 +29,12 @@ public class ServicioCrearReserva {
     private static final double DESCUENTO_POR_DIA_HABIL = 0.05;
     private static final int NUMERO_MAXIMO_RESERVAS_PARA_UNA_FECHA = 4;
 
-    public ServicioCrearReserva(RepositorioReserva repositorioReserva, RepositorioCombo repositorioCombo, DaoReserva daoReserva) {
+    public ServicioCrearReserva(RepositorioReserva repositorioReserva, RepositorioCombo repositorioCombo, DaoReserva daoReserva, DaoCombo daoCombo) {
         this.repositorioReserva = repositorioReserva;
         this.repositorioCombo = repositorioCombo;
 
         this.daoReserva = daoReserva;
+        this.daoCombo = daoCombo;
     }
     public Long ejecutar(Reserva reserva){
         generarPrecioBaseReservaCombo(reserva);
@@ -44,7 +47,7 @@ public class ServicioCrearReserva {
     }
     private void generarPrecioBaseReservaCombo(Reserva reserva){
          if(this.repositorioCombo.existe(reserva.getIdCombo())){
-             double precioBase = this.repositorioCombo.obtenerPrecioCombo(reserva.getIdCombo());
+             double precioBase = this.daoCombo.obtenerPrecioCombo(reserva.getIdCombo());
              reserva.establecerPrecioComboReserva(precioBase);
          }else{
             throw new ExcepcionComboNoExiste(COMBO_NO_EXISTE);
@@ -56,11 +59,7 @@ public class ServicioCrearReserva {
         GestionHorarios gestionHorarios = new GestionHorarios();
         boolean esDiaFestivo = gestionHorarios.esFestivo(fechaActual.getMonthValue()-1,
                fechaActual.getDayOfMonth());
-
-
         boolean esDiaHabil = (fechaActual.getDayOfWeek() != DayOfWeek.SATURDAY && fechaActual.getDayOfWeek() != DayOfWeek.SUNDAY)  && !esDiaFestivo;
-
-
         if (esDiaHabil){
             reserva.establecerPrecioComboReserva(reserva.getPrecioFinalReserva()-(reserva.getPrecioFinalReserva()*DESCUENTO_POR_DIA_HABIL));
         }else if(esDiaFestivo){

@@ -32,10 +32,5 @@ public interface RepositorioCombo {
      */
     public boolean existe(Long id);
 
-    /**
-     * Método para obtener el precio o valor de un combo
-     * @param id
-     * @return
-     */
-    public double obtenerPrecioCombo(Long id);
+
 }
