@@ -32,13 +32,6 @@ public class ConsultaControladorReservaTest {
 
     @Test
     public void aValidarListar() throws Exception {
-        mockMvc.perform(get("/reservas")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[0].nombrePersonaReserva", is("carla")))
-                .andExpect(jsonPath("$[1].nombrePersonaReserva", is("alberto")))
-                .andExpect(jsonPath("$[2].nombrePersonaReserva", is("mario")));
 
 
     }
