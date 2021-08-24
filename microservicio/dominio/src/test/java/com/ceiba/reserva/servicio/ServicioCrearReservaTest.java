@@ -22,7 +22,6 @@ import java.util.Calendar;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Reserva.class,ServicioCrearReserva.class})
-
 public class ServicioCrearReservaTest {
 
     @Test

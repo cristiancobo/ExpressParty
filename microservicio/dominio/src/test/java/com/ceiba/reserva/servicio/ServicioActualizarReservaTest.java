@@ -28,13 +28,13 @@ public class ServicioActualizarReservaTest {
         LocalDateTime fecha = LocalDateTime.of(2021,07,21,12,10,12);
         PowerMockito.when(daoReserva.encontrarFechaCreacionReserva(Mockito.anyLong())).thenReturn(fecha);
         PowerMockito.spy(LocalDateTime.class);
-        PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,21,12,50,12));
+        PowerMockito.when(LocalDateTime.now()).thenReturn(LocalDateTime.of(2021,07,21,12,56,12));
         DaoCombo daoCombo = Mockito.mock(DaoCombo.class);
         RepositorioCombo repositorioCombo = Mockito.mock(RepositorioCombo.class);
         RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
         Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
         ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva,daoReserva, daoCombo, repositorioCombo);
-        BasePrueba.assertThrows(()-> servicioActualizarReserva.ejecutar(reserva), ExcepcionTiempoExcedido.class, "El tiempo para realizar la cancelación excedió");
+        BasePrueba.assertThrows(()-> servicioActualizarReserva.ejecutar(reserva), ExcepcionTiempoExcedido.class, "El tiempo para realizar la actualizacion excedió");
     }
 
     @Test

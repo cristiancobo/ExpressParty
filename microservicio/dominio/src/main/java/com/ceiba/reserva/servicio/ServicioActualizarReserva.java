@@ -23,7 +23,7 @@ public class ServicioActualizarReserva {
     private final DaoCombo daoCombo;
     private final RepositorioCombo repositorioCombo;
     private  static final String RESERVA_NO_EXISTE = "La reserva que intenta actualizar no existe";
-    private static final String TIEMPO_EXCEDIDO = "El tiempo para realizar la cancelación excedió";
+    private static final String TIEMPO_EXCEDIDO = "El tiempo para realizar la actualizacion excedió";
     private static final int TIEMPO_MINUTOS_MAXIMO_CANCELACION_RESERVA = 30;
     private static final String COMBO_NO_EXISTE = "El combo seleccionado no existe";
     private static final int NUMERO_MAXIMO_DIAS_RESERVACION = 2;

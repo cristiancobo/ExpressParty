@@ -82,4 +82,7 @@ public class Reserva {
     public void establecerFechaExpiracionReserva(LocalDateTime fechaExpiracion){
         this.fechaExpiracion = fechaExpiracion;
     }
+    public void establecerFechaReserva(LocalDateTime fecha){
+        this.fechaReservacion = fecha;
+    }
 }

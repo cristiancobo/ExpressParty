@@ -21,7 +21,7 @@ public class ReservaTestDataBuilder {
         this.idCombo = 1L;
         this.precioFinalReserva=100000;
         this.fechaCreacionReserva = LocalDateTime.now();
-        this.fechaReservacion = LocalDateTime.of(2021,7,30,19,20,10);
+        this.fechaReservacion = LocalDateTime.now();
         this.fechaExpiracion = LocalDateTime.of(2021,8,1,19,20,10);
         this.nombrePersonaReserva = "pepito";
         this.idPersonaReserva="12345678";
