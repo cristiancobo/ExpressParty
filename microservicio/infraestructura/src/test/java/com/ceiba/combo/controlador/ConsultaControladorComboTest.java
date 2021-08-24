@@ -38,18 +38,7 @@ public class ConsultaControladorComboTest {
 
     @Test
     public void aValidarListar() throws Exception{
-        mockMvc.perform(get("/combos")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[0].nombre", is("combo 1")))
-                .andExpect(jsonPath("$[0].precio", is(100000.0)))
-                .andExpect(jsonPath("$[1].nombre", is("combo 2")))
-                .andExpect(jsonPath("$[1].precio", is(200000.0)))
-                .andExpect(jsonPath("$[2].nombre", is("combo 3")))
-                .andExpect(jsonPath("$[2].precio", is(300000.0)))
-                .andExpect(jsonPath("$[*].nombre", containsInAnyOrder("combo 1", "combo 2", "combo 3")))
-                .andExpect(jsonPath("$.*", isA(ArrayList.class)));
+   
     }
 
 }
