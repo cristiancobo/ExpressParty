@@ -21,9 +21,9 @@ jobs:
       with:
         java-version: '11'
     - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+      run: chmod +x ./microservicio/gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./microservicio/gradlew --b ./microservicio/build.gradle build -x test
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
