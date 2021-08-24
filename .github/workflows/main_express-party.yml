@@ -24,6 +24,8 @@ jobs:
       run: chmod +x ./microservicio/gradlew
     - name: Build with Gradle
       run: ./microservicio/gradlew --b ./microservicio/build.gradle build -x test
+    - name: clean 
+      run: ./microservicio/gradlew --b ./microservicio/build.gradle clean
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
