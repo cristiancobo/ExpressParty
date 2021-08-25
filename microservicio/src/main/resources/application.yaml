@@ -14,8 +14,8 @@ spring:
    datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
       type: com.zaxxer.hikari.HikariDataSource
-      jdbcUrl: jdbc:mysql://express-party-mysql.mysql.database.azure.com:3306/express_party_database
-      username: admin_root@express-party-mysql
+      jdbcUrl: jdbc:mysql://express-party-db-mysql.mysql.database.azure.com:3306/express_party_database
+      username: admin_root@express-party-db-mysql
       password: Password123
       hikari:
          poolName: pool
