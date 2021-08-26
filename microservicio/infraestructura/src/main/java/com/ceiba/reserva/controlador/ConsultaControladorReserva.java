@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservas")
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"https://angular-web-app-express-party.azurewebsites.net"})
 @Api(tags={"Controlador consulta reserva"})
 public class ConsultaControladorReserva {
 

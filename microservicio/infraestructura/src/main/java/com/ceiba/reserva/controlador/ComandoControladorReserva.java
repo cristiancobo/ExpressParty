@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/reservas")
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"https://angular-web-app-express-party.azurewebsites.net"})
 @Api(tags = { "Controlador comando reserva"})
 public class ComandoControladorReserva {
 
