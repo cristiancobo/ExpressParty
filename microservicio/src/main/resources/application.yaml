@@ -4,7 +4,7 @@ jasypt:
       algorithm: PBEWithMD5AndDES
 
 server:
-   port: 
+   port: 8082
    servlet:
       context-path: /reservas
       session:
