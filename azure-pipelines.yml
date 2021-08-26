@@ -12,8 +12,8 @@ pool:
 steps:
 - task: Gradle@2
   inputs:
-    workingDirectory: '.'
-    gradleWrapperFile: '.'
+    workingDirectory: './microservicio'
+    gradleWrapperFile: './microservicio/gradlew'
     gradleOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
