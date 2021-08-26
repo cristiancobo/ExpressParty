@@ -24,6 +24,7 @@ allprojects {
         mavenCentral() 
     }
 	apply plugin: 'org.owasp.dependencycheck'
+	apply plugin: 'war'
 
 	project.ext.apachecommons = [
 			"commons-io:commons-io:2.6",
@@ -88,8 +89,6 @@ dependencies {
 	implementation project(':infraestructura')
 }
 
-bootJar {
-	mainClassName = 'com.ceiba.Application'
-    baseName = 'reservas'
-    version =  version
+bootWar {
+	archiveName 'reservas.war'
 }
